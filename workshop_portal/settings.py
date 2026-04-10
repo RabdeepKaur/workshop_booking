@@ -156,7 +156,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Change this to the production url
 PRODUCTION_URL = 'http://localhost:8000'
 
-ADMIN_EMAIL = 'your admin email'
+ADMIN_EMAIL = 'in@gmail.com'
 
 # Set True or False to view/hide
 SHOW_WORKSHOP_STATS = True
