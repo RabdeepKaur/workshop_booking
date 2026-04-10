@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "../Styles/WorkshopPropose.css";
-
+import Navbar from "../Components/Navigation";
+import NavMobile from "../Components/NavMobile";
  
 
 function CreateWorkshopForm() {
@@ -27,23 +28,24 @@ function CreateWorkshopForm() {
   };
  
   return (
+    <>
     <div className="form-card">
       <div className="form-card-header">
-        <h2>Create workshop</h2>
-        <p>Add a new workshop to your editorial workspace</p>
+        <h2>Propose workshop</h2>
+        <p>Propose a workshop according to your own time availability </p>
       </div>
  
       {submitted && <SuccessBanner msg="Workshop created successfully!" />}
  
       <div label="Workshop title" error={errors.title}>
-        <input type="text" className={errors.title ? "error" : ""} placeholder="e.g. Digital Humanities Symposium" value={form.title} onChange={e => set("title", e.target.value)} />
+        <input type="text" className={errors.title ? "error" : ""} placeholder="e.g. Title of the workshop" value={form.title} onChange={e => set("title", e.target.value)} />
       </div>
  
       <div className="row">
         <div label="Category" error={errors.category}>
           <select className={errors.category ? "error" : ""} value={form.category} onChange={e => set("category", e.target.value)}>
-            <option value="">Select…</option>
-            {["Editorial", "Analytics", "Research", "Tech Integration"].map(c => <option key={c}>{c}</option>)}
+            <option value="">Type of Workshops</option>
+            {["Workshop1", "workshop2", "workshop3", "workshop4"].map(c => <option key={c}>{c}</option>)}
           </select>
         </div>
         <div label="Schedule date" error={errors.date}>
@@ -54,21 +56,19 @@ function CreateWorkshopForm() {
       <div label="Description" helper="Briefly describe goals and content">
         <textarea placeholder="What will participants learn?" value={form.desc} onChange={e => set("desc", e.target.value)} />
       </div>
- 
- 
-      <div label={`Completion target — ${form.completion}%`}>
-        <div className="slider-row">
-          <input type="range" min="0" max="100" step="1" value={form.completion} onChange={e => set("completion", +e.target.value)} />
-          <span className="slider-val">{form.completion}%</span>
+    <div className="field">
+          {errors.agreed && <span className="field-error">⚠ {errors.agreed}</span>}
+          <label className="checkbox-field" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 400 }}>
+            <input type="checkbox" checked={form.agreed} onChange={e => set("agreed", e.target.checked)} style={{ width: 18, height: 18 }} />
+            <span>I agree to the <a style={{ color: "var(--forest)", fontWeight: 600 }}>Academic Curator Faculty Agreement</a> and acknowledge that the content submitted is my original intellectual property.</span>
+          </label>
         </div>
-      </div>
- 
       <div className="divider" />
       <div className="btn-row">
-        <button className="btn" onClick={() => setForm({ title: "", category: "", date: "", desc: "", tags: [], completion: 50 })}>Reset</button>
         <button className="btn primary" onClick={submit}>Create workshop →</button>
       </div>
     </div>
+    </>
   );
 }
 

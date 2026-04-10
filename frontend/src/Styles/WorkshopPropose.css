@@ -271,9 +271,227 @@
   .step-line { flex: 1; height: 1.5px; background: var(--border); margin-bottom: 18px; transition: background .3s; }
   .step-line.done { background: var(--forest); }
  
+  /* ── Two-column proposal layout ── */
+  .proposal-layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 24px;
+    width: 100%;
+    max-width: 960px;
+    animation: fadeUp .3s ease both;
+  }
+ 
+  .proposal-form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+  }
+ 
+  /* ── Cover upload ── */
+  .cover-upload {
+    border: 1.5px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 36px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+    text-align: center;
+    min-height: 160px;
+  }
+  .cover-upload:hover { border-color: var(--forest); background: var(--sand); }
+  .cover-upload .cu-icon { color: var(--muted); }
+  .cover-upload .cu-label { font-size: 14px; font-weight: 600; color: var(--ink); }
+  .cover-upload .cu-hint { font-size: 12px; color: var(--muted); }
+  .cover-upload.has-image { border-style: solid; border-color: var(--forest); }
+  .cover-preview { width: 100%; height: 160px; object-fit: cover; border-radius: var(--radius-sm); }
+ 
+  /* ── Quote card ── */
+  .quote-card {
+    margin-top: 16px;
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.6;
+    text-align: center;
+  }
+ 
+  /* ── Proposals panel ── */
+  .proposals-panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .proposals-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+ 
+  .proposals-panel-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+ 
+  .live-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--sand);
+    border: 1px solid var(--border);
+    border-radius: 99px;
+    padding: 3px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+ 
+  .live-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mint);
+    animation: pulse 1.8s ease infinite;
+  }
+ 
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: .5; transform: scale(.8); }
+  }
+ 
+  .proposal-item {
+    border-left: 3px solid var(--border);
+    padding: 14px 14px;
+    margin-bottom: 10px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: var(--cream);
+    transition: border-color .2s, background .2s;
+    cursor: pointer;
+  }
+  .proposal-item:last-of-type { margin-bottom: 0; }
+  .proposal-item:hover { border-left-color: var(--forest); background: var(--sand); }
+  .proposal-item.status-review  { border-left-color: #1a4a8a; }
+  .proposal-item.status-pending { border-left-color: #8a6a1a; }
+  .proposal-item.status-accepted { border-left-color: var(--success); }
+ 
+  .proposal-item-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+ 
+  .proposal-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+ 
+  .proposal-item-date {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 3px;
+  }
+ 
+  .status-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 99px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-badge.review   { background: #ddeeff; color: #1a4a8a; }
+  .status-badge.pending  { background: #fef3d4; color: #8a6a1a; }
+  .status-badge.accepted { background: var(--tag-editorial, #d4f0e3); color: var(--success); }
+ 
+  .view-history {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--forest);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    transition: background .15s;
+    text-decoration: none;
+  }
+  .view-history:hover { background: var(--sand); }
+ 
+  /* ── Checkbox ── */
+  .checkbox-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 0;
+    cursor: pointer;
+  }
+  .checkbox-field input[type=checkbox] {
+    width: 18px; height: 18px; min-width: 18px;
+    accent-color: var(--forest);
+    margin-top: 1px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  .checkbox-field span {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  .checkbox-field a { color: var(--forest); font-weight: 600; text-decoration: underline; cursor: pointer; }
+ 
+  /* ── Submit btn ── */
+  .submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--forest);
+    color: var(--forest-light);
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 13px 28px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background .2s, transform .15s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: var(--forest-mid); transform: translateY(-1px); }
+  .submit-btn svg { flex-shrink: 0; }
+ 
   /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .proposal-layout { grid-template-columns: 1fr; }
+    .tabs { max-width: 100%; }
+  }
   @media (max-width: 600px) {
     .form-card { padding: 24px 18px; }
+    .proposal-form-card { padding: 24px 18px; }
     .row { grid-template-columns: 1fr; }
     .btn-row { flex-direction: column-reverse; }
     .btn { width: 100%; text-align: center; justify-content: center; }

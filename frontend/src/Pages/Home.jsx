@@ -15,9 +15,10 @@ const Home = () => {
   return (
     <>
       <div className="app-shell">
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+         
+        {/* <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} /> */}
         <div className="main-content">
-          <Navbar onToggleSidebar={() => setSidebarOpen(o => !o)} />
+         
           <main className="page">
  
             {/* Hero Card */}

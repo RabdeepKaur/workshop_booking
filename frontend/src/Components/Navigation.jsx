@@ -1,31 +1,67 @@
-import React, { useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import "../Styles/HomeStyle.css";
-
-function Navbar({ onToggleSidebar }) {
-  const tabs = [ "Home","Workshop Statistics", "Workshop Status", "  Propose Workshop", "   Workshop Types"];
-  const [active, setActive] = useState("Home");
+const navItems = [
+  { label: "Home",                     },
+  { label: "Filter Workshop ",},
+  { label: "Workshop Status", },
+  { label: "Propose Workshop",  },
+  { label: "All Workshop ",  },
+];
+ 
+function Sidebar({ isOpen, onClose, activeItem, onNavigate }) {
   return (
-    <nav className="navbar">
-      <div style={{ display: "flex", alignItems: "center", gap: 1 }}>
-        <button className="hamburger" onClick={onToggleSidebar} aria-label="Toggle menu">
-        <RxHamburgerMenu />
-        </button>
-        <div className="nav-logo">
-          FOSSEE
-          <span>Workspace</span>
+    <>
+      {/* Mobile overlay */}
+      <div className={`overlay ${isOpen ? "open" : ""}`} onClick={onClose} />
+ 
+      <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+ 
+        {/* Brand header */}
+        <div className="sidebar-brand">
+          <div className="brand-text">
+            <span className="brand-name">FOSSEE</span>
+            <span className="brand-sub">Workspace</span>
+          </div>
         </div>
-      </div>
-      <div className="nav-links">
-        {tabs.map(t => (
-          <a key={t} className={active === t ? "active" : ""} onClick={() => setActive(t)}>{t}</a>
-        ))}
-      </div>
-      <div className="nav-right">
-        <div className="nav-avatar">D</div>
-      </div>
-    </nav>
+ 
+        {/* User info */}
+        <div className="sidebar-user">
+          <div className="user-avatar">D</div>
+          <div className="user-info">
+            <div className="user-name">User</div>
+          </div>
+        </div>
+ 
+        {/* Nav label */}
+        <div className="nav-section-label"></div>
+ 
+        {/* Nav items */}
+        <nav className="sidebar-nav">
+          {navItems.map(item => (
+            <div
+              key={item.label}
+              className={`sidebar-item${activeItem === item.label ? " active" : ""}`}
+              onClick={() => { onNavigate(item.label); onClose(); }}
+            >
+              {/* <span className="sidebar-icon">{item.icon}</span> */}
+              {item.label}
+              {item.badge && <span className="item-badge">{item.badge}</span>}
+            </div>
+          ))}
+        </nav>
+ 
+        {/* Bottom utilities */}
+        <div className="sidebar-bottom">
+          <div className="sidebar-util">
+            {/* <span className="sidebar-icon">{icons.help}</span> */}
+            Help Center
+          </div>
+          <div className="sidebar-util">
+            {/* <span className="sidebar-icon">{icons.logout}</span> */}
+            Log Out
+          </div>
+        </div>
+ 
+      </aside>
+    </>
   );
 }
-
-export default Navbar;
+export default Sidebar;
