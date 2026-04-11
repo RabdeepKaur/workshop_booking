@@ -7,6 +7,7 @@ import Home from '../src/Pages/Home'
 import './App.css'
 import CreateWorkshopForm from './Pages/WorkshopPropose'
 import YourProposals from './Pages/WorkShopStatus'
+import WorkshopStats from './Pages/WorkshopStats'
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -33,6 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/propose" element={<CreateWorkshopForm />} />
         <Route path="/status" element={<YourProposals />} />
+        <Route path="/catalog" element={<WorkshopStats />} />
       </Routes>
     </BrowserRouter>
  
