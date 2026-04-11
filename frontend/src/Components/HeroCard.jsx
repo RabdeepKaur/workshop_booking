@@ -1,8 +1,9 @@
 import  "../Styles/HomeStyle.css";
  import { CiUser } from "react-icons/ci";
-
+import { useNavigate } from 'react-router-dom';
 
 function Card1() {
+  const navigate = useNavigate();
   return (
    <div className="hero-card">
       <div>
@@ -12,11 +13,11 @@ function Card1() {
         </p>
 
         <div className="hero-actions">
-          <button className="btn-primary">
+          <button className="btn-primary" onClick={() => navigate('/catalog')}>
             {/* <Icon d={icons.plus} size={15} fill="none" /> */}
-            View Workshops
+            View All Workshops
           </button>
-         <button className="btn-outline">Porpose Workshop</button>
+         <button className="btn-outline" onClick={()=>navigate('/propose')}>Propose Workshops</button>
         </div>
       </div>
       <div className="hero-stats">

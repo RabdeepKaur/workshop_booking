@@ -1,9 +1,9 @@
+import {NavLink} from "react-router-dom"
 const navItems = [
-  { label: "Home",                     },
-  { label: "Filter Workshop ",},
-  { label: "Workshop Status", },
-  { label: "Propose Workshop",  },
-  { label: "All Workshop ",  },
+  { label: "Home",  path:"/" ,},  
+  { label: "Filter Workshop " ,path:"/catalog",},
+  { label: "Workshop Status",  path:"/status"},
+  { label: "Propose Workshop", path:"/propose" },
 ];
  
 function Sidebar({ isOpen, onClose, activeItem, onNavigate }) {
@@ -34,19 +34,22 @@ function Sidebar({ isOpen, onClose, activeItem, onNavigate }) {
         <div className="nav-section-label"></div>
  
         {/* Nav items */}
-        <nav className="sidebar-nav">
-          {navItems.map(item => (
-            <div
-              key={item.label}
-              className={`sidebar-item${activeItem === item.label ? " active" : ""}`}
-              onClick={() => { onNavigate(item.label); onClose(); }}
-            >
-              {/* <span className="sidebar-icon">{item.icon}</span> */}
-              {item.label}
-              {item.badge && <span className="item-badge">{item.badge}</span>}
-            </div>
-          ))}
-        </nav>
+      
+<nav className="sidebar-nav">
+  {navItems.map(item => (
+    <NavLink
+      key={item.label}
+      to={item.path}
+      className={({ isActive }) =>
+        `sidebar-item${isActive ? " active" : ""}`
+      }
+      onClick={onClose}  
+    >
+      {item.label}
+      {item.badge && <span className="item-badge">{item.badge}</span>}
+    </NavLink>
+  ))}
+</nav>
  
         {/* Bottom utilities */}
         <div className="sidebar-bottom">

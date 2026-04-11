@@ -1,7 +1,6 @@
 import { useState } from "react";
 import "../Styles/WorkshopPropose.css";
-import Navbar from "../Components/Navigation";
-import NavMobile from "../Components/NavMobile";
+
  
 
 function CreateWorkshopForm() {

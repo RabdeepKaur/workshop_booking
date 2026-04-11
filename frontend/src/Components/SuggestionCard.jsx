@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import "../Styles/HomeStyle.css";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -15,7 +16,7 @@ function Card2() {
           <h3>Workshop Name</h3>
           <p>WorkShop Description.</p>
           <div className="read-more">
-            Read Full Analysis <FaArrowRight />
+           <NavLink to="/status"> Go to the Workshops <FaArrowRight /> </NavLink>
           </div>
         </div>
       </div>

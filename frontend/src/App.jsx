@@ -29,14 +29,14 @@ function App() {
         />
 
           
-    <BrowserRouter>
+   
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/propose" element={<CreateWorkshopForm />} />
         <Route path="/status" element={<YourProposals />} />
         <Route path="/catalog" element={<WorkshopStats />} />
       </Routes>
-    </BrowserRouter>
+   
  
     </>
   )

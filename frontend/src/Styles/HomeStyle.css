@@ -22,7 +22,10 @@
     --tag-research: #f0e8ff;
     --tag-research-text: #5a2a8a;
   }
- 
+ .page{
+  padding-top:0;
+  margin-top:0;
+ }
   body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--ink); }
  
   /* ── Scrollbar ── */
@@ -32,9 +35,6 @@
  
   /* ── Layout ── */
   .app-shell { display: flex; min-height: 100vh; }
-  .sidebar { width: 220px; background: #fff; border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 28px 0; position: fixed; top: 0; bottom: 0; left: 0; z-index: 100; transition: transform .3s ease; }
-  .sidebar.closed { transform: translateX(-100%); }
-  .main-content { margin-left: 220px; flex: 1; padding-bottom: 40px; }
  
   /* ── Navbar ── */
   .sidebar {
@@ -49,6 +49,7 @@
     z-index: 200;
     transition: transform 0.28s cubic-bezier(.4,0,.2,1);
     overflow: hidden;
+    text-decoration: none;
   }
  
   /* ── Sidebar top brand strip ── */
@@ -58,6 +59,7 @@
     justify-content: space-between;
     padding: 22px 20px 20px;
     border-bottom: 1px solid rgba(255,255,255,.08);
+    text-decoration: none;
   }
  
   .brand-text {
@@ -82,30 +84,11 @@
     margin-top: 2px;
   }
  
-  .close-btn {
-    display: none;
-    background: rgba(255,255,255,.08);
-    border: none;
-    color: rgba(255,255,255,.7);
-    cursor: pointer;
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    transition: background .18s;
-    flex-shrink: 0;
-  }
- 
-  .close-btn:hover { background: rgba(255,255,255,.15); }
- 
-  /* ── Avatar section ── */
   .sidebar-user {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 20px 20px 16px;
+    padding: 12px 20px 16px;
     border-bottom: 1px solid rgba(255,255,255,.08);
   }
  
@@ -127,7 +110,7 @@
   .user-info { flex: 1; overflow: hidden; }
  
   .user-name {
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 600;
     color: #fff;
     white-space: nowrap;
@@ -135,21 +118,8 @@
     text-overflow: ellipsis;
   }
  
-  .user-role {
-    font-size: 11px;
-    color: rgba(255,255,255,.45);
-    margin-top: 1px;
-  }
- 
   /* ── Nav section label ── */
-  .nav-section-label {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: .12em;
-    color: rgba(255,255,255,.3);
-    padding: 20px 20px 8px;
-  }
+
  
   /* ── Nav items ── */
   .sidebar-nav {
@@ -166,6 +136,7 @@
     align-items: center;
     gap: 11px;
     padding: 10px 12px;
+    padding-top:15px;
     border-radius: 9px;
     cursor: pointer;
     font-size: 14px;
@@ -175,6 +146,7 @@
     margin-bottom: 2px;
     user-select: none;
     position: relative;
+    text-decoration: none;
   }
  
   .sidebar-item:hover {
@@ -197,32 +169,6 @@
     height: 60%;
     background: var(--mint);
     border-radius: 0 3px 3px 0;
-  }
- 
-  .sidebar-icon {
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
- 
-  .sidebar-icon svg {
-    width: 17px;
-    height: 17px;
-  }
- 
-  .item-badge {
-    margin-left: auto;
-    font-size: 10px;
-    font-weight: 700;
-    background: var(--mint);
-    color: var(--forest);
-    border-radius: 99px;
-    padding: 2px 8px;
-    min-width: 20px;
-    text-align: center;
   }
  
   /* ── Bottom utilities ── */
@@ -250,12 +196,11 @@
     color: rgba(255,255,255,.75);
   }
  
-  .sidebar-util svg { width: 16px; height: 16px; flex-shrink: 0; }
  
   /* ── Hamburger trigger (mobile only) ── */
   .hamburger-trigger {
     display: none;
-    position: fixed;
+    position: relative;
     top: 14px;
     left: 14px;
     z-index: 300;
@@ -294,19 +239,8 @@
   .main-content {
     margin-left: var(--sidebar-w);
     flex: 1;
-    padding: 36px 32px;
     min-height: 100vh;
   }
- 
-  /* demo placeholder */
-  .demo-page h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--forest);
-    margin-bottom: 10px;
-  }
-  .demo-page p { font-size: 15px; color: var(--muted); line-height: 1.7; }
  
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
@@ -333,11 +267,8 @@
     .main-content { padding: 72px 16px 32px; }
   }
  
-  /* ── Page Content ── */
-  .page { padding: 32px; max-width: 1100px; margin: 0 auto; }
- 
   /* ── Hero Card (Card1) ── */
-  .hero-card { background: linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 100%); border-radius: 20px; padding: 36px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; margin-bottom: 40px; }
+  .hero-card { background: linear-gradient(135deg, var(--forest) 0%, var(--forest-dark) 100%); border-radius: 20px; padding: 36px 40px; display: flex; align-items: center; justify-content: space-between; gap: 24px; position: relative; overflow: hidden; margin-bottom: 20px; }
   .hero-card::before { content: ''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(62,207,142,.18) 0%, transparent 70%); pointer-events: none; }
   .hero-date { display: inline-flex; align-items: center; background: rgba(62,207,142,.18); color: var(--mint); border-radius: 20px; padding: 4px 14px; font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 16px; }
   .hero-title { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 16px; }
