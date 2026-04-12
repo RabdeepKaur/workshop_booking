@@ -37,29 +37,33 @@ function CreateWorkshopForm() {
       {submitted && <SuccessBanner msg="Workshop created successfully!" />}
  
       <div label="Workshop title" error={errors.title}>
+        <p> Title of the workshop </p>
         <input type="text" className={errors.title ? "error" : ""} placeholder="e.g. Title of the workshop" value={form.title} onChange={e => set("title", e.target.value)} />
       </div>
  
       <div className="row">
         <div label="Category" error={errors.category}>
+          <p> Select the category that best fits your workshop. </p>
           <select className={errors.category ? "error" : ""} value={form.category} onChange={e => set("category", e.target.value)}>
             <option value="">Type of Workshops</option>
             {["Workshop1", "workshop2", "workshop3", "workshop4"].map(c => <option key={c}>{c}</option>)}
           </select>
         </div>
         <div label="Schedule date" error={errors.date}>
+          <p> When do you plan to conduct the workshop? </p>
           <input type="date" className={errors.date ? "error" : ""} value={form.date} onChange={e => set("date", e.target.value)} />
         </div>
       </div>
  
       <div label="Description" helper="Briefly describe goals and content">
+        <p> Briefly describe the goals and content of your workshop. </p>
         <textarea placeholder="What will participants learn?" value={form.desc} onChange={e => set("desc", e.target.value)} />
       </div>
     <div className="field">
           {errors.agreed && <span className="field-error">⚠ {errors.agreed}</span>}
           <label className="checkbox-field" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 400 }}>
             <input type="checkbox" checked={form.agreed} onChange={e => set("agreed", e.target.checked)} style={{ width: 18, height: 18 }} />
-            <span>I agree to the <a style={{ color: "var(--forest)", fontWeight: 600 }}>Academic Curator Faculty Agreement</a> and acknowledge that the content submitted is my original intellectual property.</span>
+            <span>I agree to the <a style={{ color: "var(--forest)", fontWeight: 600 }}>Terms and Conditions</a> </span>
           </label>
         </div>
       <div className="divider" />

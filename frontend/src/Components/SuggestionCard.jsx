@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import "../Styles/HomeStyle.css";
 import { FaArrowRight } from "react-icons/fa";
+import {lazy, Suspense} from "react";
+// add lazy loading and susoend here for the icons and images
 
 function Card2() {
   return (
@@ -16,7 +18,11 @@ function Card2() {
           <h3>Workshop Name</h3>
           <p>WorkShop Description.</p>
           <div className="read-more">
-           <NavLink to="/status"> Go to the Workshops <FaArrowRight /> </NavLink>
+           <NavLink to="/status"> Go to the Workshops 
+              <Suspense fallback={<span>→</span>}>
+                <FaArrowRight aria-hidden="true" />
+              </Suspense>
+           </NavLink>
           </div>
         </div>
       </div>

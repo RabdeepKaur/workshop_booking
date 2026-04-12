@@ -1,15 +1,36 @@
-import Navbar from "../Components/Navigation"
-import Card1 from "../Components/HeroCard"
-import Card2 from "../Components/SuggestionCard"
+import {lazy , Suspense} from "react";
+import {Helmet} from "react-helmet-async";
 
- import { useState } from "react";
-import { FaArrowRight } from "react-icons/fa";
+ const Card1=lazy(()=>import("../Components/HeroCard"));
+ const Card2=lazy(()=>import("../Components/SuggestionCard"));
 
- 
-
+ const CardSkeleton = ({ height = "200px" })=>{
+ <div
+    style={{
+      height,
+      borderRadius: "12px",
+      background: "var(--border)",
+      animation: "pulse 1.5s ease-in-out infinite",
+    }}
+  />
+ }
 const Home = () => {
   return (
     <>
+      <Helmet>
+        <title>Home | FOSSEE Workshop Booking</title>
+        <meta
+          name="description"
+          content="Discover, propose and track free Python and engineering workshops offered by FOSSEE, IIT Bombay."
+        />
+        <meta property="og:title" content="Home | FOSSEE Workshop Booking" />
+        <meta
+          property="og:description"
+          content="Discover, propose and track free Python and engineering workshops offered by FOSSEE, IIT Bombay."
+        />
+        <meta property="og:url" content="https://workshop.fossee.in/" />
+        <link rel="canonical" href="https://workshop.fossee.in/" />
+      </Helmet>
       <div className="app-shell">
          
         {/* <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} /> */}
@@ -20,17 +41,20 @@ const Home = () => {
     FOSSEE Workshops
   </div>
             {/* Hero Card */}
+            <Suspense fallback={<div><CardSkeleton /></div>}>
             <Card1 />
- 
+            </Suspense>
             {/* Continue Curating */}
             <div className="section-header">
               <div>
-                <div className="section-title">Your Current Worksop</div>
-                <div className="section-sub">Pick up where you left off in your editorial workflow.</div>
+                <div className="section-title">Your Current Workshops</div>
+                <div className="section-sub">See the workshops you are attending ,have proposed and their status.</div>
               </div>
             </div>
             <div className="Section-header">
+              <Suspense fallback={<div><CardSkeleton /></div>}>
            <Card2/>
+           </Suspense>
             </div>
 
  

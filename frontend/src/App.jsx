@@ -14,7 +14,7 @@ function App() {
   const [activePage, setActivePage] = useState("Home");
   return (
     <>
-        <button
+        {/* <button
         className="hamburger-trigger"
         onClick={() => setSidebarOpen(o => !o)}
         aria-label="Open menu"
@@ -26,7 +26,7 @@ function App() {
           onClose={() => setSidebarOpen(false)}
           activeItem={activePage}
           onNavigate={setActivePage}
-        />
+        /> */}
 
           
    

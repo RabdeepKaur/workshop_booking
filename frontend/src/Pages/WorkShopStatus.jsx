@@ -1,4 +1,4 @@
-import "../Styles/WorkshopPropose.css";
+import "../Styles/WorkShopStatus.css";
 function YourProposals() {
   const statusClass  = { "Under Review": "review", "Pending": "pending", "Accepted": "accepted" };
   const borderClass  = { "Under Review": "status-review", "Pending": "status-pending", "Accepted": "status-accepted" };

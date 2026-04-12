@@ -1,6 +1,8 @@
+import { lazy,Suspense } from "react";
 import  "../Styles/HomeStyle.css";
  import { CiUser } from "react-icons/ci";
 import { useNavigate } from 'react-router-dom';
+// add lazy loading here for the icons and image
 
 function Card1() {
   const navigate = useNavigate();
@@ -17,11 +19,13 @@ function Card1() {
             {/* <Icon d={icons.plus} size={15} fill="none" /> */}
             View All Workshops
           </button>
-         <button className="btn-outline" onClick={()=>navigate('/propose')}>Propose Workshops</button>
+         <button className="btn-outline" onClick={()=>navigate('/propose')}>Propose Workshop</button>
         </div>
       </div>
       <div className="hero-stats">
+        <Suspense fallback={<div style={{width:300 , height:300}}/>}>
        <CiUser size={300}  color="white"/>
+       </Suspense>
       </div>
     </div>
   );
