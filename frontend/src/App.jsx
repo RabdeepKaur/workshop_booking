@@ -5,6 +5,7 @@ import Navbar from "./Components/Navigation";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Home from '../src/Pages/Home'
 import './App.css'
+import "../src/Styles/HomeStyle.css"
 import CreateWorkshopForm from './Pages/WorkshopPropose'
 import YourProposals from './Pages/WorkShopStatus'
 import WorkshopStats from './Pages/WorkshopStats'
@@ -14,10 +15,11 @@ function App() {
   const [activePage, setActivePage] = useState("Home");
   return (
     <>
-        {/* <button
+         <button
         className="hamburger-trigger"
-        onClick={() => setSidebarOpen(o => !o)}
-        aria-label="Open menu"
+      onClick={() => setSidebarOpen(true)}
+  style={{ display: sidebarOpen ? "none" : "flex" }}
+  aria-label="Open navigation menu"
       >
       <GiHamburgerMenu />
       </button>
@@ -26,7 +28,7 @@ function App() {
           onClose={() => setSidebarOpen(false)}
           activeItem={activePage}
           onNavigate={setActivePage}
-        /> */}
+        /> 
 
           
    

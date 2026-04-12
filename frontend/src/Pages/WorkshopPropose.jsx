@@ -1,14 +1,22 @@
 import { useState } from "react";
 import "../Styles/WorkshopPropose.css";
-
+import { Helmet } from "react-helmet-async";
  
-
+const WORKSHOP_CATEGORIES = [
+  "Python Programming",
+  "Simulation Tools",
+  "Engineering Software",
+  "Data Science",
+];
 function CreateWorkshopForm() {
   const [form, setForm] = useState({ title: "", category: "", date: "", desc: "", tags: ["Curriculum", "Pedagogy"], completion: 50 });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
  
-  const set = (k, v) => { setForm(f => ({ ...f, [k]: v })); setErrors(e => ({ ...e, [k]: "" })); };
+ const updateField=(Key,value)=>{
+  setForm(prev=>({...prev,[Key]:value}));
+  setErrors(prev=>({...prev,[Key]:""}));
+ }
  
   const validate = () => {
     const e = {};
@@ -18,7 +26,7 @@ function CreateWorkshopForm() {
     return e;
   };
  
-  const submit = () => {
+  const handleSubmit = () => {
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     setSubmitted(true);
@@ -28,49 +36,111 @@ function CreateWorkshopForm() {
  
   return (
     <>
-    <div className="form-card">
-      <div className="form-card-header">
-        <h2>Propose workshop</h2>
-        <p>Propose a workshop according to your own time availability </p>
+     <Helmet>
+        <title>Propose a Workshop | FOSSEE Workshop Booking</title>
+        <meta
+          name="description"
+          content="Submit your workshop proposal to FOSSEE, IIT Bombay. Choose your topic, category, and preferred date."
+        />
+        <meta property="og:title" content="Propose a Workshop | FOSSEE" />
+        <meta
+          property="og:description"
+          content="Submit your workshop proposal to FOSSEE, IIT Bombay."
+        />
+        <link rel="canonical" href="https://workshop.fossee.in/propose" />
+      </Helmet>
+   <div className="form-card">
+
+        {/* Header */}
+        <div className="form-card-header">
+  <h1>Propose a Workshop</h1>
+  <p>Propose a workshop according to your own time availability.</p>
+</div>
+
+{submitted && <SuccessBanner msg="Workshop proposed successfully!" />}
+
+{/* Title */}
+<div className="form-group">
+  <label htmlFor="title">Workshop Title</label>
+  <input
+    id="title"
+    type="text"
+    placeholder="e.g. Introduction to Python"
+    className={errors.title ? "error" : ""}
+    value={form.title}
+    onChange={e => updateField("title", e.target.value)}
+    aria-required="true"
+  />
+  {errors.title && <span className="field-error">⚠ {errors.title}</span>}
+</div>
+
+{/* Category + Date */}
+<div className="row">
+  <div className="form-group">
+    <label htmlFor="category">Category</label>
+    <select
+      id="category"
+      className={errors.category ? "error" : ""}
+      value={form.category}
+      onChange={e => updateField("category", e.target.value)}
+      aria-required="true"
+    >
+      <option value="">Select a category</option>
+      {WORKSHOP_CATEGORIES.map(c => (
+        <option key={c} value={c}>{c}</option>
+      ))}
+    </select>
+    {errors.category && <span className="field-error">⚠ {errors.category}</span>}
+  </div>
+
+  <div className="form-group">
+    <label htmlFor="date">Preferred Date</label>
+    <input
+      id="date"
+      type="date"
+      className={errors.date ? "error" : ""}
+      value={form.date}
+      onChange={e => updateField("date", e.target.value)}
+      aria-required="true"
+    />
+    {errors.date && <span className="field-error">⚠ {errors.date}</span>}
+  </div>
+</div>
+
+{/* Description */}
+<div className="form-group">
+  <label htmlFor="desc">Description</label>
+  <textarea
+    id="desc"
+    placeholder="What will participants learn? What are the goals?"
+    value={form.desc}
+    onChange={e => updateField("desc", e.target.value)}
+    rows={4}
+  />
+</div>
+
+{/* Terms */}
+<div className="form-group">
+  <label className="checkbox-label">
+    <input
+      type="checkbox"
+      checked={form.agreed}
+      onChange={e => updateField("agreed", e.target.checked)}
+    />
+    <span>
+      I agree to the{" "}
+      <a href="/terms">Terms and Conditions</a>
+    </span>
+  </label>
+  {errors.agreed && <span className="field-error">⚠ {errors.agreed}</span>}
+</div>
+
+<div className="divider" />
+
+<button className="submit-btn" onClick={handleSubmit}>
+  Create workshop →
+</button>
       </div>
- 
-      {submitted && <SuccessBanner msg="Workshop created successfully!" />}
- 
-      <div label="Workshop title" error={errors.title}>
-        <p> Title of the workshop </p>
-        <input type="text" className={errors.title ? "error" : ""} placeholder="e.g. Title of the workshop" value={form.title} onChange={e => set("title", e.target.value)} />
-      </div>
- 
-      <div className="row">
-        <div label="Category" error={errors.category}>
-          <p> Select the category that best fits your workshop. </p>
-          <select className={errors.category ? "error" : ""} value={form.category} onChange={e => set("category", e.target.value)}>
-            <option value="">Type of Workshops</option>
-            {["Workshop1", "workshop2", "workshop3", "workshop4"].map(c => <option key={c}>{c}</option>)}
-          </select>
-        </div>
-        <div label="Schedule date" error={errors.date}>
-          <p> When do you plan to conduct the workshop? </p>
-          <input type="date" className={errors.date ? "error" : ""} value={form.date} onChange={e => set("date", e.target.value)} />
-        </div>
-      </div>
- 
-      <div label="Description" helper="Briefly describe goals and content">
-        <p> Briefly describe the goals and content of your workshop. </p>
-        <textarea placeholder="What will participants learn?" value={form.desc} onChange={e => set("desc", e.target.value)} />
-      </div>
-    <div className="field">
-          {errors.agreed && <span className="field-error">⚠ {errors.agreed}</span>}
-          <label className="checkbox-field" style={{ textTransform: "none", letterSpacing: 0, fontWeight: 400 }}>
-            <input type="checkbox" checked={form.agreed} onChange={e => set("agreed", e.target.checked)} style={{ width: 18, height: 18 }} />
-            <span>I agree to the <a style={{ color: "var(--forest)", fontWeight: 600 }}>Terms and Conditions</a> </span>
-          </label>
-        </div>
-      <div className="divider" />
-      <div className="btn-row">
-        <button className="btn primary" onClick={submit}>Create workshop →</button>
-      </div>
-    </div>
     </>
   );
 }

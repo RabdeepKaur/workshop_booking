@@ -2,8 +2,8 @@ import { RxCross2 } from "react-icons/rx";
 import { FaEye } from "react-icons/fa";
 import { FaDownload } from "react-icons/fa6";
 import { IoMdClock } from "react-icons/io";
-import { SiLevelsdotfyi } from "react-icons/si";
-const WORKSHOPS = [
+
+const workshop = [
   {
     id: 1,
     title: "Advanced Qualitative Methodology & Analysis",
@@ -17,21 +17,21 @@ const WORKSHOPS = [
     title: "Inclusive Classroom Strategies for Higher Ed",
     tag: "Pedagogy", tagClass: "tag-pedagogy",
     duration: "2 Hours", level: "Intermediate",
-    img: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80",
+    img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80",
   },
   {
     id: 3,
     title: "AI Tools for Bibliographic Management",
     tag: "Technology", tagClass: "tag-technology",
     duration: "90 Mins", level: "Introductory",
-    img: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80",
+    img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80",
   },
   {
     id: 4,
     title: "Data Visualization for Social Research",
     tag: "Analytics", tagClass: "tag-analytics",
     duration: "3 Hours", level: "Intermediate",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+    img: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80",
   },
 ];
 
@@ -61,7 +61,7 @@ function FilterPanel({ filters, onChange, onClear, onView, onDownload }) {
         <div className="select-wrap">
           <select value={filters.workshop} onChange={e => onChange("workshop", e.target.value)}>
             <option value="">----------</option>
-            {WORKSHOPS.map(w => <option key={w.id} value={w.id}>{w.title}</option>)}
+            {workshop.map(w => <option key={w.id} value={w.id}>{w.title}</option>)}
           </select>
         </div>
       </div>
@@ -108,14 +108,13 @@ function FilterPanel({ filters, onChange, onClear, onView, onDownload }) {
     </div>
      <div className="workshop-card">
       <div className="card-img-wrap">
-        <img className="card-img" src={WORKSHOPS.img} alt={WORKSHOPS.title} loading="lazy" />
-        <span className={`card-tag ${WORKSHOPS.tagClass}`}>{WORKSHOPS.tag}</span>
+        <img className="card-img" src={`https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&q=80`} alt={workshop.title} loading="lazy" />
+        <span className={`card-tag ${workshop.tagClass}`}>{workshop.tag}</span>
       </div>
       <div className="card-body">
-        <div className="card-title">{WORKSHOPS.title}</div>
+        <div className="card-title">The workshops</div>
         <div className="card-meta">
-          <div className="meta-item"><IoMdClock />{WORKSHOPS.duration}</div>
-          <div className="meta-item"><SiLevelsdotfyi />{WORKSHOPS.level}</div>
+          <div className="meta-item"><IoMdClock />3 Hours</div>
         </div>
         <button className="view-btn">View Details</button>
       </div>

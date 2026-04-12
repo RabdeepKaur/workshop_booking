@@ -60,7 +60,7 @@ const Home = () => {
  
             {/* Trending */}
             <div className="section-header">
-              <div>
+              <div style={{marginTop:"32px"}}>
                 <div className="section-title">Trending in Workshop</div>
                 <div className="section-sub">See all the trending workshops in your field.</div>
               </div>

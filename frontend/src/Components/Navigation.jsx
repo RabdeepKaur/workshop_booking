@@ -1,4 +1,5 @@
 import {NavLink} from "react-router-dom"
+import { IoMdClose } from "react-icons/io";
 const navItems = [
   { label: "Home",  path:"/" ,},  
   { label: "Filter Workshop " ,path:"/catalog",},
@@ -21,7 +22,15 @@ function Sidebar({ isOpen, onClose, activeItem, onNavigate }) {
             <span className="brand-sub">Workspace</span>
           </div>
         </div>
- 
+   <button
+    className="close-btn"
+    onClick={onClose}
+    aria-label="Close navigation menu"
+    style={{position:"right"}}
+  >
+    <IoMdClose />
+  </button>
+
         {/* User info */}
         <div className="sidebar-user">
           <div className="user-avatar">D</div>
