@@ -13,7 +13,7 @@
  
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/workshop_booking.git
+git clone https://github.com/RabdeepKaur/workshop_booking.git
 cd workshop_booking
  
 # 2. Install dependencies
@@ -31,13 +31,13 @@ The app will be available at `http://localhost:5173`
  
 The redesign was guided by four core principles:
  
-**Visual hierarchy** — he original website does not provide a visual cue to order the content. A new dark forest green hero card was added at the top of the page, which allowed the lighter content to be placed below it in progressively lighter shades. The result was that all users could identify within seconds where to take action (View Workshops, Propose Workshop).
+**Visual hierarchy** — The original interface didn’t clearly guide users on where to focus first. To fix this, I introduced a dark forest green hero section at the top, with lighter content flowing below it. This creates a natural visual flow, so users can quickly spot key actions like “View Workshops” or “Propose Workshop” without thinking too much.
  
-**Mobile-first layout** — Each component was designed with a width of 375px, and all components scaled thereafter. The sidebar collapses into an off-canvas drawer on mobile and is revealed with a hamburger trigger. 
+**Mobile-first layout** — I designed everything starting with a 375px width (mobile screen) and then scaled it up for larger devices. The sidebar is replaced with a clean off-canvas menu on smaller screens, accessible through a simple hamburger icon, making navigation smooth and uncluttered. 
  
-**Consistent design language** — A single CSS variable system (`--forest`, `--mint`, `--cream`, `--border`) is shared across all components. This means color, spacing, and typography are predictable across every page — the user always knows they're on the same site.
+**Consistent design language** —  I used a shared set of CSS variables (--forest, --mint, --cream, --border) across the entire app. This keeps colors, spacing, and typography consistent, so the interface feels cohesive and familiar no matter which page the user is on.
  
-**Accessibility as a baseline, not an afterthought** — All form inputs have visible `<label>` elements (not just placeholders), buttons have `aria-label` attributes, decorative icons use `aria-hidden="true"`, and error messages use `role="alert"` so screen readers announce them.
+**Accessibility as a baseline, not an afterthought** — Instead of treating accessibility as an afterthought, I built it into the design. All inputs have proper labels (not just placeholders), buttons include aria-labels, decorative icons are hidden from screen readers, and error messages are announced properly using role="alert". This ensures the app works well for all users.
  
 ---
  
@@ -61,7 +61,7 @@ Several concrete techniques were used:
  
 **Google Fonts vs. system fonts** — I chose to import `Playfair Display` and `DM Sans` from Google Fonts. This adds ~2 render-blocking requests but significantly improves the visual quality of headings. To mitigate this, the `@import` uses `display=swap` so body text renders immediately in a fallback font while the custom fonts load.
  
-**react-snap was evaluated and rejected** — I considered using `react-snap` for static pre-rendering to improve SEO for search engine crawlers. After running `npm audit`, it reported 9 high-severity vulnerabilities with no available fix (the package is unmaintained since 2019). I removed it in favour of `react-helmet-async` for per-route meta tags, which provides most of the SEO benefit without the security risk.
+**react-snap was evaluated and rejected** — I considered using `react-snap` for static pre-rendering to improve SEO for search engine crawlers. After running `npm audit`, it reported 9 high-severity vulnerabilities with no available fix . I removed it in favour of `react-helmet-async` for per-route meta tags, which provides most of the SEO benefit without the security risk.
  
 **Icon lazy loading** — `react-icons` is a large package. Icons in `HeroCard` and `SuggestionCard` are loaded with `React.lazy()` and wrapped in `<Suspense>` with a dimensioned fallback div. This keeps the main JS bundle smaller at the cost of a small delay on first icon render, which is invisible to the user.
  
@@ -71,18 +71,12 @@ Several concrete techniques were used:
  
 ### 4. What was the most challenging part of the task and how did you approach it?
  
-The most challenging part was **diagnosing and fixing the excessive top spacing on mobile**.
- 
-The gap between the top of the viewport and the first content on the Home page was caused by two separate issues stacking on top of each other:
- 
-1. The hamburger button used `position: relative` instead of `position: fixed`. Because it was in normal document flow, it occupied ~56px of vertical space before the page content even started.
- 
-2. The `.main-content` container had `padding-top: 80px` on mobile — intended to clear the hamburger — which compounded the first issue instead of being the sole source of spacing.
- 
-My approach was to inspect the computed layout in DevTools, identify every element contributing to the top offset, and fix the root causes rather than compensating with negative margins. Changing the hamburger to `position: fixed` removed its flow contribution, and reducing `padding-top` to `60px` then provided just enough clearance without the excessive gap.
- 
-This is a good example of why CSS specificity and layout context matter — the original code had the right intent but the wrong CSS property, and the symptoms (a large visual gap) looked identical to a simple padding issue.
- 
+The most challenging part was figuring out the overall user experience. The site needs to handle three things at the same time — letting users view their workshops, propose new ones, and also keep them motivated to stay engaged. None of these is more important than the others, so the real challenge was making sure each page gives the right context without making users feel confused or lost.
+
+On the technical side, the main challenge was organizing the component structure so that it supports the user experience instead of complicating it. The sidebar navigation needed to be always accessible but not distracting. So, on desktop, it stays fixed on the left, while the main content has enough space on the right.
+
+Each page is built as its own route with its own set of components. For example, the Home page uses components like HeroCard and SuggestionCard, while the Catalog page uses FilterPanel and a grid of cards. Keeping components small and focused helped ensure that each page only handles what it needs, without unnecessary overlap between different parts of the app.
+
 ---
  
 ## Pages
@@ -118,7 +112,6 @@ This is a good example of why CSS specificity and layout context matter — the 
  
 ## Screenshots
  
-> Replace the placeholders below with your actual before/after screenshots.
  
 ### Before
  
@@ -138,4 +131,3 @@ https://github.com/user-attachments/assets/537c573e-1509-4a78-ae76-21ba88f8c9b0
 
 ---
  
-© FOSSEE, IIT Bombay. All Rights Reserved.
