@@ -1,3 +1,4 @@
+
 # FOSSEE Workshop Booking — Python Screening Task : UI/UX Enhancement
 
 
@@ -38,6 +39,8 @@ The redesign was guided by four core principles:
 **Consistent design language** —  I used a shared set of CSS variables (--forest, --mint, --cream, --border) across the entire app. This keeps colors, spacing, and typography consistent, so the interface feels cohesive and familiar no matter which page the user is on.
  
 **Accessibility as a baseline, not an afterthought** — Instead of treating accessibility as an afterthought, I built it into the design. All inputs have proper labels (not just placeholders), buttons include aria-labels, decorative icons are hidden from screen readers, and error messages are announced properly using role="alert". This ensures the app works well for all users.
+
+**SEO and discoverability** — I also added dynamic SEO support across the application using React Helmet. This allows each page to have its own title and metadata, making it easier for search engines to understand and index the content properly. As a result, each page is better optimized for visibility and can be indexed more effectively by search engine crawlers.
  
 ---
  
@@ -49,8 +52,6 @@ Several concrete techniques were used:
  
 - **Two breakpoints only** — `max-width: 1024px` collapses the sidebar and `max-width: 600px` handles small phones. Keeping breakpoints minimal reduces maintenance overhead and avoids conflicting rules.
  
-- **`position: fixed` hamburger** — The hamburger button is `position: fixed`, not `position: relative`, so it never contributes to document flow and doesn't push page content down. This was a specific bug found and fixed during development.
- 
 - **`box-sizing: border-box` globally** — Applied to `*, *::before, *::after` so padding never causes inputs or containers to overflow their parents on narrow screens.
  
 - **Tested at 375×667 (iPhone SE)** — All four pages (Home, Propose, Status, Catalog) were verified at this viewport, which is the minimum supported size.
@@ -58,10 +59,10 @@ Several concrete techniques were used:
 ---
  
 ### 3. What trade-offs did you make between design and performance?
+
+ **react-snap was evaluated and rejected** — I considered using `react-snap` for static pre-rendering to improve SEO for search engine crawlers. After running `npm audit`, it reported 9 high-severity vulnerabilities with no available fix . I removed it in favour of `react-helmet-async` for per-route meta tags, which provides most of the SEO benefit without the security risk.
  
 **Google Fonts vs. system fonts** — I chose to import `Playfair Display` and `DM Sans` from Google Fonts. This adds ~2 render-blocking requests but significantly improves the visual quality of headings. To mitigate this, the `@import` uses `display=swap` so body text renders immediately in a fallback font while the custom fonts load.
- 
-**react-snap was evaluated and rejected** — I considered using `react-snap` for static pre-rendering to improve SEO for search engine crawlers. After running `npm audit`, it reported 9 high-severity vulnerabilities with no available fix . I removed it in favour of `react-helmet-async` for per-route meta tags, which provides most of the SEO benefit without the security risk.
  
 **Icon lazy loading** — `react-icons` is a large package. Icons in `HeroCard` and `SuggestionCard` are loaded with `React.lazy()` and wrapped in `<Suspense>` with a dimensioned fallback div. This keeps the main JS bundle smaller at the cost of a small delay on first icon render, which is invisible to the user.
  
@@ -119,9 +120,10 @@ Each page is built as its own route with its own set of components. For example,
 https://github.com/user-attachments/assets/537c573e-1509-4a78-ae76-21ba88f8c9b0
 
 
-| Home | Catalog |
-|---|---|
-| ![Before Home](./screenshots/before-home.png) | ![Before Catalog](./screenshots/before-catalog.png) |
+| Home | Catalog | Propose | Status |
+|------|--------|---------|--------|
+| <img src="https://github.com/user-attachments/assets/c5a5dfa5-b518-4f08-ba4d-0ef008a4a47d" width="200"/>|<img src="https://github.com/user-attachments/assets/eb24ceab-0800-4d36-bd28-ddfe64ea6a6c" width="200"/> | <img src="https://github.com/user-attachments/assets/74d3e0ed-07ca-4f54-ad5e-f8bc30f23760" width="200"/> | <img src="https://github.com/user-attachments/assets/e3220424-3712-4508-b387-a91d6e3f969a" width="200"/> | 
+
  
 ### After
  
